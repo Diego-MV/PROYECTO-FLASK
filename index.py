@@ -65,7 +65,6 @@ def update_autor(id):
 @app.route('/registrar_usuario')
 def registrar_usuarioget():
 	return render_template('add_user.html')
-
 @app.route('/registrar_usuariopost', methods=['POST'])
 def registrar_usuario():
 	if request.method == 'POST':
@@ -91,7 +90,6 @@ def editoriales():
 @app.route('/add_editorial')
 def add_editorial():
 	return render_template('add_editorial.html')
-
 @app.route('/add_editorialpost', methods = ['POST'])
 def add_editorialpost():
 	if request.method == 'POST':
@@ -100,7 +98,6 @@ def add_editorialpost():
 		cur.execute("INSERT INTO editorial (Nombre)VALUES ('%s')"%(name) )
 		mysql.connection.commit()
 		flash('Editorial Agregada Correctamente')
-		
 		return redirect(url_for('add_editorial'))
 
 #######################################################################################
@@ -113,7 +110,6 @@ def categorias():
 @app.route('/add_categoria')
 def add_categoria():
 	return render_template('add_categoria.html')
-
 @app.route('/add_categoriapost', methods = ['POST'])
 def add_categoriapost():
 	if request.method == 'POST':
@@ -122,7 +118,6 @@ def add_categoriapost():
 		cur.execute("INSERT INTO categoria (Nombre)VALUES ('%s')"%(name) )
 		mysql.connection.commit()
 		flash('Categoria Creada Correctamente')
-		
 		return redirect(url_for('add_categoria'))
 @app.route('/delete_categoria/<string:id>')
 def delete_categoria(id):
@@ -131,6 +126,39 @@ def delete_categoria(id):
 	mysql.connection.commit()
 	flash('Categoria Eliminada')
 	return redirect(url_for('categorias'))
+#######################################################################################################################
+@app.route('/libros')
+def libros():
+	cur = mysql.connection.cursor()
+	cur.execute('SELECT * FROM Libro')
+	data = cur.fetchall()
+	return render_template('list_libros.html', libros = data)
+@app.route('/add_libro')
+def add_libro():
+	return render_template('add_libro.html')
+@app.route('/add_libropost', methods = ['POST'])
+def add_libropost():
+	if request.method == 'POST':
+		nombre = request.form['nombre']
+		ejemplares = request.form['ejemplares']
+		editorial = request.form['editorial']
+		autor = request.form['autor']
+		resumem=request.form['resumen']
+		NumPaginas=request.form['numpag']
 
+		cur = mysql.connection.cursor()
+		
+		cur.execute('select Id_Editorial from editorial where Nombre=%s'%(editorial))
+		mysql.connection.commit()
+		edit=cur.fetchall()
+		cur.execute('SELECT Id_Autor FROM autor WHERE Nombre=`%s`'%(autor))
+		mysql.connection.commit()
+		aut=cur.fetchall()
+		
+		
+		cur.execute("INSERT INTO libro (Nombre,FechaLanz,NumPaginas,Ejemplares,Id_Editorial,Id_Autor)VALUES ('%s')"%(nombre, resumem,NumPaginas ,ejemplares, edit, aut) )
+		mysql.connection.commit()
+		flash('Categoria Creada Correctamente')
+		return redirect(url_for('add_categoria'))
 if __name__=='__main__':
 	app.run(port=5000,debug=True)

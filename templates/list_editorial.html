@@ -15,7 +15,7 @@
                             {% for editorial in editorials %}  
                             <tr>
                                 <td>{{editorial.0}}</td>
-                                <td>{{editorial.1}}</td>
+                                <td><a href="/libros_por_editorial/{{editorial.0}}">{{editorial.1}}</a></td>
                                 <td>
                                     <a href="/editeditorial/{{editorial.0}}" class="btn btn-secondary">EDITAR</a>
                                     <a href="/deleteeditorial/{{editorial.0}}" class="btn btn-danger btn-delete">BORRAR</a>

@@ -8,17 +8,27 @@
                             <tr>
                                 <td>ID</td>
                                 <td>NOMBRE</td>
+                                <td>NUMERO DE PAGINAS</td>
+                                <td>RESUMEN</td>
+                                <td>CANTIDAD DE EJEMPLARES</td>
+                                <td>EDITORIAL</td>
+                                <td>AUTOR</td>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for categoria in categorias %}  
+                            {% for contact in contacts %}  
                             <tr>
-                                <td>{{categoria.0}}</td>
-                                <td><a href="/libros_por_categoria/{{categoria.0}}">{{categoria.1}}</a></td>
+                                <td>{{libro.0}}</td>
+                                <td>{{libro.1}}</td>
+                                <td>{{libro.2}}</td>
+                                <td>{{libro.3}}</td>
+                                <td>{{libro.4}}</td>
+                                <td>{{libro.5}}</td>
+                                <td>{{libro.6}}</td>
                                 
                                 <td>
-                                    
-                                    <a href="/delete_categoria/{{categoria.0}}" class="btn btn-danger btn-delete">BORRAR</a>
+                                    <a href="/editautor/{{contact.0}}" class="btn btn-secondary">EDITAR</a>
+                                    <a href="/deleteautor/{{contact.0}}" class="btn btn-danger btn-delete">BORRAR</a>
                                 </td>
                             {% endfor %}
                                

@@ -16,7 +16,7 @@
                             {% for contact in contacts %}  
                             <tr>
                                 <td>{{contact.0}}</td>
-                                <td>{{contact.1}}</td>
+                                <td><a href="/libros_por_autor/{{contact.0}}">{{contact.1}}</a></td>
                                 <td>{{contact.2}}</td>
                                 <td>
                                     <a href="/editautor/{{contact.0}}" class="btn btn-secondary">EDITAR</a>
