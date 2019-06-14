@@ -91,19 +91,46 @@ def editoriales():
 @app.route('/add_editorial')
 def add_editorial():
 	return render_template('add_editorial.html')
+
 @app.route('/add_editorialpost', methods = ['POST'])
 def add_editorialpost():
 	if request.method == 'POST':
-		nombre = request.form['nombreedit']
-		
-		
+		name = request.form['nombreedit']
 		cur = mysql.connection.cursor()
-		cur.execute("INSERT INTO Editorial (Nombre) VALUES(%s)",(nombre))
+		cur.execute("INSERT INTO editorial (Nombre)VALUES ('%s')"%(name) )
 		mysql.connection.commit()
 		flash('Editorial Agregada Correctamente')
-		return redirect(url_for('add_editorial'))
-	else:
+		
 		return redirect(url_for('add_editorial'))
 
+#######################################################################################
+@app.route('/categorias')
+def categorias():
+	cur = mysql.connection.cursor()
+	cur.execute('SELECT * FROM Categoria')
+	data = cur.fetchall()
+	return render_template('list_categoria.html', categorias = data)
+@app.route('/add_categoria')
+def add_categoria():
+	return render_template('add_categoria.html')
+
+@app.route('/add_categoriapost', methods = ['POST'])
+def add_categoriapost():
+	if request.method == 'POST':
+		name = request.form['nombreedit']
+		cur = mysql.connection.cursor()
+		cur.execute("INSERT INTO categoria (Nombre)VALUES ('%s')"%(name) )
+		mysql.connection.commit()
+		flash('Categoria Creada Correctamente')
+		
+		return redirect(url_for('add_categoria'))
+@app.route('/delete_categoria/<string:id>')
+def delete_categoria(id):
+	cur = mysql.connection.cursor()
+	cur.execute('DELETE FROM Categoria WHERE Id_Categoria= {0}'.format(id))
+	mysql.connection.commit()
+	flash('Categoria Eliminada')
+	return redirect(url_for('categorias'))
+
 if __name__=='__main__':
-	app.run(port=3000,debug=True)
+	app.run(port=5000,debug=True)

@@ -15,10 +15,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="http://localhost:3000">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                   
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Autores
@@ -40,7 +36,16 @@
                     </li>
 
                     <li class="nav-item active">
-                      <a class="nav-link" href="http://localhost:3000/registrar_usuario">Registrar Usuario <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="/registrar_usuario">Registrar Usuario <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorias
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/categorias">Listado de Categorias</a>
+                        <a class="dropdown-item" href="/add_categoria">Crear Categoria</a>
+                      </div>
                     </li>
                   </ul>
                 </div>
