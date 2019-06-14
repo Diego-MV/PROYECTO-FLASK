@@ -1,0 +1,48 @@
+{%extends 'layout.html'%}
+{%block body%}
+
+<div class="row">
+        <div class="col-md-12">
+                <table class="table table-striped table-bordered bg-white table-sm">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>NOMBRE</td>
+                                <td>PAIS</td>
+                                <td>OPCIONES</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contact in contacts %}  
+                            <tr>
+                                <td>{{contact.0}}</td>
+                                <td>{{contact.1}}</td>
+                                <td>{{contact.2}}</td>
+                                <td>
+                                    <a href="/editautor/{{contact.0}}" class="btn btn-secondary">EDITAR</a>
+                                    <a href="/deleteautor/{{contact.0}}" class="btn btn-danger btn-delete">BORRAR</a>
+                                </td>
+                            {% endfor %}
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{%endblock%}

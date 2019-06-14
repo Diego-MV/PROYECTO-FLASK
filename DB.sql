@@ -1,0 +1,72 @@
+CREATE DATABASE IF NOT EXISTS Biblioteca;
+USE Biblioteca;
+
+
+CREATE TABLE IF NOT EXISTS Autor(
+	Id_Autor INT NOT NULL AUTO_INCREMENT,
+	Nombre   VARCHAR(45) DEFAULT NULL,
+    Nacionalidad  VARCHAR(45) DEFAULT NULL,
+	PRIMARY KEY(Id_Autor)
+);
+
+CREATE TABLE IF NOT EXISTS Editorial(
+	Id_Editorial  INT(11) NOT NULL AUTO_INCREMENT,
+	Nombre        VARCHAR(45) DEFAULT NULL,
+	PRIMARY KEY(Id_Editorial)
+);
+
+CREATE TABLE IF NOT EXISTS Categoria(
+	Id_Categoria  INT(11) NOT NULL AUTO_INCREMENT,
+	Nombre        VARCHAR(45) DEFAULT NULL,
+	PRIMARY KEY(Id_Categoria)
+);
+
+CREATE TABLE IF NOT EXISTS Libro(
+	Id_Libro   INT(11) NOT NULL AUTO_INCREMENT,
+	Nombre     VARCHAR(45) DEFAULT NULL,
+	NumPaginas INT(11) DEFAULT NULL,
+	FechaLanz  VARCHAR(45) DEFAULT NULL,
+	Ejemplares INT(11) DEFAULT NULL,
+	Id_Autor   INT(11) DEFAULT NULL,
+	Id_Categoria INT(11) DEFAULT NULL,
+	Id_Editorial INT(11) DEFAULT NULL,
+	PRIMARY KEY(Id_Libro),
+	FOREIGN KEY(Id_Autor) REFERENCES Autor(Id_Autor),
+	FOREIGN KEY(Id_Editorial) REFERENCES Editorial(Id_Editorial)
+);
+
+CREATE TABLE IF NOT EXISTS Categoria_Libro(
+	Id_Libro     INT(11),
+	Id_Categoria INT(11) DEFAULT NULL,
+	PRIMARY KEY(Id_Libro),
+    FOREIGN KEY(Id_Libro) REFERENCES Libro(Id_Libro),
+	FOREIGN KEY(Id_Categoria) REFERENCES Categoria(Id_Categoria)
+);
+
+CREATE TABLE IF NOT EXISTS Ejemplar(
+	Id_Ejemplar INT(11) NOT NULL AUTO_INCREMENT,
+	NumEjemplar INT(11) DEFAULT NULL,
+	Id_Libro    INT(11) DEFAULT NULL,
+	PRIMARY KEY(Id_Ejemplar),
+	FOREIGN KEY(Id_Libro) REFERENCES Libro(Id_Libro)
+);
+
+CREATE TABLE IF NOT EXISTS Usuario(
+	Id_Usuario INT(11) NOT NULL AUTO_INCREMENT,
+	Nombre     VARCHAR(45) DEFAULT NULL,
+	Telefono   INT(11) DEFAULT NULL,
+	Mail       VARCHAR(45) DEFAULT NULL,
+	Contrasenna VARCHAR(45) DEFAULT NULL,
+	PRIMARY KEY(Id_Usuario)
+);
+
+CREATE TABLE IF NOT EXISTS Prestamo(
+	Id_Prestamo   INT(11) NOT NULL AUTO_INCREMENT,
+	FechaEntrega  VARCHAR(45) DEFAULT NULL,
+	FechaPrestamo VARCHAR(45) DEFAULT NULL,
+	Id_Usuario    INT(11) DEFAULT NULL,
+	Id_Ejemplar   INT(11) DEFAULT NULL,
+	PRIMARY KEY(Id_Prestamo),
+	FOREIGN KEY(Id_Usuario) REFERENCES Usuario(Id_Usuario),
+	FOREIGN KEY(Id_Ejemplar) REFERENCES Ejemplar(Id_Ejemplar)
+);
